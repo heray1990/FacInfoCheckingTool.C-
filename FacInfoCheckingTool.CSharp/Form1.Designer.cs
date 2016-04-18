@@ -33,19 +33,21 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.串口设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.watermarkTextBoxBarcode = new FacInfoCheckingTool.CSharp.WatermarkTextBox();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.watermarkTextBoxMacAddr = new FacInfoCheckingTool.CSharp.WatermarkTextBox();
+            this.watermarkTextBoxBarcode = new FacInfoCheckingTool.CSharp.WatermarkTextBox();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.watermarkTextBoxMacAddr);
             this.groupBox1.Controls.Add(this.watermarkTextBoxBarcode);
-            this.groupBox1.Location = new System.Drawing.Point(12, 28);
+            this.groupBox1.Location = new System.Drawing.Point(165, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(184, 100);
+            this.groupBox1.Size = new System.Drawing.Size(182, 81);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "条码数据";
@@ -56,7 +58,7 @@
             this.设置ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(284, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(353, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -74,14 +76,14 @@
             this.串口设置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.串口设置ToolStripMenuItem.Text = "串口设置";
             // 
-            // watermarkTextBoxBarcode
+            // pictureBoxLogo
             // 
-            this.watermarkTextBoxBarcode.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.watermarkTextBoxBarcode.Location = new System.Drawing.Point(6, 20);
-            this.watermarkTextBoxBarcode.Name = "watermarkTextBoxBarcode";
-            this.watermarkTextBoxBarcode.Size = new System.Drawing.Size(170, 23);
-            this.watermarkTextBoxBarcode.TabIndex = 1;
-            this.watermarkTextBoxBarcode.WatermarkText = "请输入电视条码";
+            this.pictureBoxLogo.InitialImage = null;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(10, 28);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(150, 80);
+            this.pictureBoxLogo.TabIndex = 2;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // watermarkTextBoxMacAddr
             // 
@@ -92,21 +94,33 @@
             this.watermarkTextBoxMacAddr.TabIndex = 2;
             this.watermarkTextBoxMacAddr.WatermarkText = "请输入 MAC 地址";
             // 
+            // watermarkTextBoxBarcode
+            // 
+            this.watermarkTextBoxBarcode.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.watermarkTextBoxBarcode.Location = new System.Drawing.Point(6, 20);
+            this.watermarkTextBoxBarcode.Name = "watermarkTextBoxBarcode";
+            this.watermarkTextBoxBarcode.Size = new System.Drawing.Size(170, 23);
+            this.watermarkTextBoxBarcode.TabIndex = 1;
+            this.watermarkTextBoxBarcode.WatermarkText = "请输入电视条码";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(353, 262);
+            this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "工厂信息检验工具";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,6 +134,7 @@
         private System.Windows.Forms.ToolStripMenuItem 串口设置ToolStripMenuItem;
         private WatermarkTextBox watermarkTextBoxBarcode;
         private WatermarkTextBox watermarkTextBoxMacAddr;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
     }
 }
 

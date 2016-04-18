@@ -15,5 +15,10 @@ namespace FacInfoCheckingTool.CSharp
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
+        }
     }
 }
