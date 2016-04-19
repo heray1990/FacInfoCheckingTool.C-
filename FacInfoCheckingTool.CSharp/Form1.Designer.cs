@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.watermarkTextBoxMacAddr = new FacInfoCheckingTool.CSharp.WatermarkTextBox();
+            this.watermarkTextBoxBarcode = new FacInfoCheckingTool.CSharp.WatermarkTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.串口设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,8 +45,6 @@
             this.labelResult = new System.Windows.Forms.Label();
             this.labelModelName = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
-            this.watermarkTextBoxMacAddr = new FacInfoCheckingTool.CSharp.WatermarkTextBox();
-            this.watermarkTextBoxBarcode = new FacInfoCheckingTool.CSharp.WatermarkTextBox();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -62,6 +62,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "条码数据";
+            // 
+            // watermarkTextBoxMacAddr
+            // 
+            this.watermarkTextBoxMacAddr.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.watermarkTextBoxMacAddr.Location = new System.Drawing.Point(6, 49);
+            this.watermarkTextBoxMacAddr.Name = "watermarkTextBoxMacAddr";
+            this.watermarkTextBoxMacAddr.Size = new System.Drawing.Size(170, 23);
+            this.watermarkTextBoxMacAddr.TabIndex = 2;
+            this.watermarkTextBoxMacAddr.WatermarkText = "请输入 MAC 地址";
+            // 
+            // watermarkTextBoxBarcode
+            // 
+            this.watermarkTextBoxBarcode.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.watermarkTextBoxBarcode.Location = new System.Drawing.Point(6, 20);
+            this.watermarkTextBoxBarcode.Name = "watermarkTextBoxBarcode";
+            this.watermarkTextBoxBarcode.Size = new System.Drawing.Size(170, 23);
+            this.watermarkTextBoxBarcode.TabIndex = 1;
+            this.watermarkTextBoxBarcode.WatermarkText = "请输入电视条码";
             // 
             // menuStrip1
             // 
@@ -203,24 +221,6 @@
             this.pictureBoxLogo.TabIndex = 2;
             this.pictureBoxLogo.TabStop = false;
             // 
-            // watermarkTextBoxMacAddr
-            // 
-            this.watermarkTextBoxMacAddr.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.watermarkTextBoxMacAddr.Location = new System.Drawing.Point(6, 49);
-            this.watermarkTextBoxMacAddr.Name = "watermarkTextBoxMacAddr";
-            this.watermarkTextBoxMacAddr.Size = new System.Drawing.Size(170, 23);
-            this.watermarkTextBoxMacAddr.TabIndex = 2;
-            this.watermarkTextBoxMacAddr.WatermarkText = "请输入 MAC 地址";
-            // 
-            // watermarkTextBoxBarcode
-            // 
-            this.watermarkTextBoxBarcode.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.watermarkTextBoxBarcode.Location = new System.Drawing.Point(6, 20);
-            this.watermarkTextBoxBarcode.Name = "watermarkTextBoxBarcode";
-            this.watermarkTextBoxBarcode.Size = new System.Drawing.Size(170, 23);
-            this.watermarkTextBoxBarcode.TabIndex = 1;
-            this.watermarkTextBoxBarcode.WatermarkText = "请输入电视条码";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -236,6 +236,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "工厂信息检验工具";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

@@ -18,8 +18,11 @@ namespace FacInfoCheckingTool.CSharp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
+            SplashScreen splashScreen = new SplashScreen();
+            splashScreen.TopMost = true;
+            splashScreen.Show();
 
+            pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
             OutputLog.ShowLog(textBoxLog, "Hello world!");
         }
     }
