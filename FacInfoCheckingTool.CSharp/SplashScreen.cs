@@ -19,10 +19,12 @@ namespace FacInfoCheckingTool.CSharp
 
         private void SplashScreen_Load(object sender, EventArgs e)
         {
+
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             this.Dispose();
         }
     }

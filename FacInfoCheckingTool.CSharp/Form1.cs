@@ -20,10 +20,15 @@ namespace FacInfoCheckingTool.CSharp
         {
             SplashScreen splashScreen = new SplashScreen();
             splashScreen.TopMost = true;
-            splashScreen.Show();
+            this.Hide();
+            this.ShowInTaskbar = false;
 
-            pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
-            OutputLog.ShowLog(textBoxLog, "Hello world!");
+            if (splashScreen.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
+                OutputLog.ShowLog(textBoxLog, "Hello world!");
+                this.Show();
+            }
         }
     }
 }
