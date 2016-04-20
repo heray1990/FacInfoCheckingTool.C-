@@ -48,10 +48,26 @@ namespace FacInfoCheckingTool.CSharp
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void buttonStart_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Dispose();
+        }
+
+        private void comboBoxBrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
+            XDocument config = XDocument.Load(xmlFileName);
+
+            IEnumerable<string> queryModels = from item in config.Descendants("product").Descendants("model")
+                                              where (string)item.Parent.Parent.Attribute("brand").Value == comboBoxBrand.Text
+                                              select item.Value;
+            comboBoxModel.Text = queryModels.First();
+            comboBoxModel.Items.Clear();
+            foreach (string itemModel in queryModels)
+            {
+                comboBoxModel.Items.Add(itemModel);
+            }
         }
     }
 }

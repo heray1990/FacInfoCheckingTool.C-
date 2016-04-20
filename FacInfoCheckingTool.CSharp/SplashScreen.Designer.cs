@@ -33,6 +33,7 @@
             this.comboBoxBrand = new System.Windows.Forms.ComboBox();
             this.comboBoxModel = new System.Windows.Forms.ComboBox();
             this.labelVersion = new System.Windows.Forms.Label();
+            this.buttonStart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -46,7 +47,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "工厂信息检验工具";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // comboBoxBrand
             // 
@@ -55,6 +55,7 @@
             this.comboBoxBrand.Name = "comboBoxBrand";
             this.comboBoxBrand.Size = new System.Drawing.Size(71, 20);
             this.comboBoxBrand.TabIndex = 1;
+            this.comboBoxBrand.SelectedIndexChanged += new System.EventHandler(this.comboBoxBrand_SelectedIndexChanged);
             // 
             // comboBoxModel
             // 
@@ -78,6 +79,16 @@
             this.labelVersion.Text = "Version";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // buttonStart
+            // 
+            this.buttonStart.Location = new System.Drawing.Point(122, 140);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.TabIndex = 4;
+            this.buttonStart.Text = "开始";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
             // SplashScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -85,6 +96,7 @@
             this.BackgroundImage = global::FacInfoCheckingTool.CSharp.Properties.Resources.SplashScreen;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(320, 200);
+            this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.comboBoxModel);
             this.Controls.Add(this.comboBoxBrand);
@@ -106,5 +118,6 @@
         private System.Windows.Forms.ComboBox comboBoxBrand;
         private System.Windows.Forms.ComboBox comboBoxModel;
         private System.Windows.Forms.Label labelVersion;
+        private System.Windows.Forms.Button buttonStart;
     }
 }
