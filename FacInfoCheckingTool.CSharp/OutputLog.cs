@@ -22,7 +22,7 @@ namespace FacInfoCheckingTool.CSharp
             SaveLogInFile(log);
         }
 
-        private static void SaveLogInFile(string log)
+        public static void SaveLogInFile(string log)
         {
             string logPath = Path.GetDirectoryName(Application.ExecutablePath);
 

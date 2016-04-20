@@ -50,8 +50,11 @@ namespace FacInfoCheckingTool.CSharp
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                var result = MessageBox.Show(ex.Message, "config.xml 文件不存在",
+                string caption = "config.xml 文件不存在";
+                var result = MessageBox.Show(ex.Message, caption,
                     MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                OutputLog.SaveLogInFile(caption + ", 退出程序！");
 
                 if (result == DialogResult.OK)
                 {
