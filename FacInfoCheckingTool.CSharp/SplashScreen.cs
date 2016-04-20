@@ -21,31 +21,43 @@ namespace FacInfoCheckingTool.CSharp
 
         private void SplashScreen_Load(object sender, EventArgs e)
         {
-            string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
-            XDocument config = XDocument.Load(xmlFileName);
-
-            string queryStringResult = config.Descendants("currentproduct").Descendants("brand").First().Value;
-            comboBoxBrand.Text = queryStringResult;
-
-            queryStringResult = config.Descendants("currentproduct").Descendants("model").First().Value;
-            comboBoxModel.Text = queryStringResult;
-
-            IEnumerable<string> queryBrands = from item in config.Descendants("products").Descendants("product").Attributes()
-                              select item.Value;
-
-            foreach (string itemBrand in queryBrands)
+            try
             {
-                comboBoxBrand.Items.Add(itemBrand);
-            }
+                string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
+                XDocument config = XDocument.Load(xmlFileName);
 
-            IEnumerable<string> queryModels = from item in config.Descendants("product").Descendants("model")
-                              where (string)item.Parent.Parent.Attribute("brand").Value == comboBoxBrand.Text
-                              select item.Value;
-            foreach (string itemModel in queryModels)
+                string queryStringResult = config.Descendants("currentproduct").Descendants("brand").First().Value;
+                comboBoxBrand.Text = queryStringResult;
+
+                queryStringResult = config.Descendants("currentproduct").Descendants("model").First().Value;
+                comboBoxModel.Text = queryStringResult;
+
+                IEnumerable<string> queryBrands = from item in config.Descendants("products").Descendants("product").Attributes()
+                                                  select item.Value;
+
+                foreach (string itemBrand in queryBrands)
+                {
+                    comboBoxBrand.Items.Add(itemBrand);
+                }
+
+                IEnumerable<string> queryModels = from item in config.Descendants("product").Descendants("model")
+                                                  where (string)item.Parent.Parent.Attribute("brand").Value == comboBoxBrand.Text
+                                                  select item.Value;
+                foreach (string itemModel in queryModels)
+                {
+                    comboBoxModel.Items.Add(itemModel);
+                }
+            }
+            catch (System.IO.FileNotFoundException ex)
             {
-                comboBoxModel.Items.Add(itemModel);
-            }
+                var result = MessageBox.Show(ex.Message, "config.xml 文件不存在",
+                    MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
+                if (result == DialogResult.OK)
+                {
+                    System.Environment.Exit(0);
+                }
+            }
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
