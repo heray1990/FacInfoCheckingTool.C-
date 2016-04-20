@@ -25,8 +25,18 @@ namespace FacInfoCheckingTool.CSharp
 
             if (splashScreen.ShowDialog() == DialogResult.OK)
             {
-                pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
-                OutputLog.ShowLog(textBoxLog, "Hello world!");
+                if (splashScreen.BrandName == "CAN")
+                {
+                    pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
+                }
+                else if(splashScreen.BrandName == "Haier")
+                {
+                    pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.Haier;
+                }
+
+                labelModelName.Text = splashScreen.ModelName;
+
+                splashScreen.Dispose();
                 this.Show();
             }
         }

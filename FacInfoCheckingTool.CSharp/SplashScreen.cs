@@ -19,6 +19,18 @@ namespace FacInfoCheckingTool.CSharp
             InitializeComponent();
         }
 
+        private string brandName, modelName;
+
+        public string BrandName
+        {
+            get { return brandName; }
+        }
+
+        public string ModelName
+        {
+            get { return modelName; }
+        }
+
         private void SplashScreen_Load(object sender, EventArgs e)
         {
             try
@@ -67,15 +79,18 @@ namespace FacInfoCheckingTool.CSharp
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            brandName = comboBoxBrand.Text;
+            modelName = comboBoxModel.Text;
+
             string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
             XDocument config = XDocument.Load(xmlFileName);
 
-            config.Descendants("currentproduct").First().SetElementValue("brand", comboBoxBrand.Text);
-            config.Descendants("currentproduct").First().SetElementValue("model", comboBoxModel.Text);
+            config.Descendants("currentproduct").First().SetElementValue("brand", brandName);
+            config.Descendants("currentproduct").First().SetElementValue("model", modelName);
             config.Save(xmlFileName);
 
             this.DialogResult = DialogResult.OK;
-            this.Dispose();
+            this.Hide();
         }
 
         private void comboBoxBrand_SelectedIndexChanged(object sender, EventArgs e)
