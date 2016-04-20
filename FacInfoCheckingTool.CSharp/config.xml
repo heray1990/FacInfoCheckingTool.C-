@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config>
+	<currentproduct>
+		<brand>CAN</brand>
+		<model>C49S</model>
+	</currentproduct>
+
+	<products>
+		<product brand="CAN">
+			<models>
+				<model>C42S</model>
+				<model>C49S</model>
+				<model>C43C</model>
+				<model>C49C</model>
+			</models>
+		</product>
+		<product brand="Haier">
+			<models>
+				<model>70P3</model>
+				<model>75P3</model>
+			</models>
+		</product>
+	</products>
+
+	<serialport baud="9600" id="1"/>
+</config>

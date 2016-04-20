@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashScreen));
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxBrand = new System.Windows.Forms.ComboBox();
+            this.comboBoxModel = new System.Windows.Forms.ComboBox();
+            this.labelVersion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -39,11 +42,41 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(0, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(400, 23);
+            this.label1.Size = new System.Drawing.Size(320, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "工厂信息检验工具";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // comboBoxBrand
+            // 
+            this.comboBoxBrand.FormattingEnabled = true;
+            this.comboBoxBrand.Location = new System.Drawing.Point(79, 90);
+            this.comboBoxBrand.Name = "comboBoxBrand";
+            this.comboBoxBrand.Size = new System.Drawing.Size(71, 20);
+            this.comboBoxBrand.TabIndex = 1;
+            // 
+            // comboBoxModel
+            // 
+            this.comboBoxModel.FormattingEnabled = true;
+            this.comboBoxModel.Location = new System.Drawing.Point(156, 90);
+            this.comboBoxModel.Name = "comboBoxModel";
+            this.comboBoxModel.Size = new System.Drawing.Size(80, 20);
+            this.comboBoxModel.TabIndex = 2;
+            // 
+            // labelVersion
+            // 
+            this.labelVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelVersion.BackColor = System.Drawing.Color.Transparent;
+            this.labelVersion.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelVersion.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.labelVersion.Location = new System.Drawing.Point(208, 179);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelVersion.Size = new System.Drawing.Size(100, 12);
+            this.labelVersion.TabIndex = 3;
+            this.labelVersion.Text = "Version";
+            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // SplashScreen
             // 
@@ -51,7 +84,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::FacInfoCheckingTool.CSharp.Properties.Resources.SplashScreen;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(400, 250);
+            this.ClientSize = new System.Drawing.Size(320, 200);
+            this.Controls.Add(this.labelVersion);
+            this.Controls.Add(this.comboBoxModel);
+            this.Controls.Add(this.comboBoxBrand);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -67,5 +103,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxBrand;
+        private System.Windows.Forms.ComboBox comboBoxModel;
+        private System.Windows.Forms.Label labelVersion;
     }
 }

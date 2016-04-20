@@ -27,7 +27,7 @@ namespace FacInfoCheckingTool.CSharp
             string logPath = Path.GetDirectoryName(Application.ExecutablePath);
 
             System.IO.StreamWriter sw = System.IO.File.AppendText(logPath
-                + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+                + @"\" + DateTime.Now.ToString("yyyy-MM-dd") + @".log");
             sw.WriteLine(DateTime.Now.ToString("HH:mm:ss > ") + log);
             sw.Close();
             sw.Dispose();
