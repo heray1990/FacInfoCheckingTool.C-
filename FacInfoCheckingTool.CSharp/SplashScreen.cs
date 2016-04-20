@@ -23,6 +23,8 @@ namespace FacInfoCheckingTool.CSharp
         {
             try
             {
+                /* Load Brand and Model from config.xml. And initialize the 
+                 * items of comboBoxBrand and comboBoxModel. */
                 string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
                 XDocument config = XDocument.Load(xmlFileName);
 
@@ -65,6 +67,13 @@ namespace FacInfoCheckingTool.CSharp
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
+            XDocument config = XDocument.Load(xmlFileName);
+
+            config.Descendants("currentproduct").First().SetElementValue("brand", comboBoxBrand.Text);
+            config.Descendants("currentproduct").First().SetElementValue("model", comboBoxModel.Text);
+            config.Save(xmlFileName);
+
             this.DialogResult = DialogResult.OK;
             this.Dispose();
         }
