@@ -71,6 +71,7 @@
             this.watermarkTextBoxMacAddr.Size = new System.Drawing.Size(170, 23);
             this.watermarkTextBoxMacAddr.TabIndex = 2;
             this.watermarkTextBoxMacAddr.WatermarkText = "请输入 MAC 地址";
+            this.watermarkTextBoxMacAddr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.watermarkTextBoxMacAddr_KeyPress);
             // 
             // watermarkTextBoxBarcode
             // 
@@ -80,6 +81,7 @@
             this.watermarkTextBoxBarcode.Size = new System.Drawing.Size(170, 23);
             this.watermarkTextBoxBarcode.TabIndex = 1;
             this.watermarkTextBoxBarcode.WatermarkText = "请输入电视条码";
+            this.watermarkTextBoxBarcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.watermarkTextBoxBarcode_KeyPress);
             // 
             // menuStrip1
             // 
