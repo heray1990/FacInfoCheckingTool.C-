@@ -50,6 +50,7 @@ namespace FacInfoCheckingTool.CSharp
             {
                 if (watermarkTextBoxBarcode.Text.Length == 1)
                 {
+                    watermarkTextBoxBarcode.ReadOnly = true;
                     watermarkTextBoxMacAddr.Focus();
                 }
                 else
@@ -87,6 +88,7 @@ namespace FacInfoCheckingTool.CSharp
             {
                 if (watermarkTextBoxMacAddr.Text.Length == 1)
                 {
+                    watermarkTextBoxMacAddr.ReadOnly = true;
                     textBoxLog.Focus();
                 }
                 else
