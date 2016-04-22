@@ -31,7 +31,7 @@ namespace FacInfoCheckingTool.CSharp
             System.IO.Directory.CreateDirectory(logPath + @"\Logs");
             System.IO.StreamWriter sw = System.IO.File.AppendText(logPath
                 + @"\Logs\" + DateTime.Now.ToString("yyyy-MM-dd") + @".log");
-            sw.WriteLine(DateTime.Now.ToString("HH:mm:ss > ") + log);
+            sw.WriteLine(DateTime.Now.ToString(String.Format("[{0}]HH:mm:ss > ", Version())) + log);
             sw.Close();
             sw.Dispose();
         }
