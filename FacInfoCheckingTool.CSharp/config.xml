@@ -6,18 +6,30 @@
   </currentproduct>
   <products>
     <product brand="CAN">
-      <models>
-        <model>C42S</model>
-        <model>C49S</model>
-        <model>C43C</model>
-        <model>C49C</model>
-      </models>
+      <barcodelength>1</barcodelength>
+      <macaddrlength>12</macaddrlength>
+      <model name="C42S">
+        <swversion>V2.2.5</swversion>
+      </model>
+      <model name="C49S">
+        <swversion>V2.3.3</swversion>
+      </model>
+      <model name="C43C">
+        <swversion>V0.0.3</swversion>
+      </model>
+      <model name="C49C">
+        <swversion>V2.3.3</swversion>
+      </model>
     </product>
     <product brand="Haier">
-      <models>
-        <model>70P3</model>
-        <model>75P3</model>
-      </models>
+      <barcodelength>2</barcodelength>
+      <macaddrlength>12</macaddrlength>
+      <model name="70P3">
+        <swversion>V2.2.5</swversion>
+      </model>
+      <model name="75P3">
+        <swversion>V2.3.5</swversion>
+      </model>
     </product>
   </products>
   <serialport baud="9600" id="1" />

@@ -212,7 +212,7 @@
             this.labelModelName.Size = new System.Drawing.Size(150, 25);
             this.labelModelName.TabIndex = 6;
             this.labelModelName.Text = "Model";
-            this.labelModelName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelModelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBoxLogo
             // 

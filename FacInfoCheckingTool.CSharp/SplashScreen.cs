@@ -55,8 +55,8 @@ namespace FacInfoCheckingTool.CSharp
                 }
 
                 IEnumerable<string> queryModels = from item in config.Descendants("product").Descendants("model")
-                                                  where (string)item.Parent.Parent.Attribute("brand").Value == comboBoxBrand.Text
-                                                  select item.Value;
+                                                  where (string)item.Parent.Attribute("brand").Value == comboBoxBrand.Text
+                                                  select item.Attribute("name").Value;
                 foreach (string itemModel in queryModels)
                 {
                     comboBoxModel.Items.Add(itemModel);
@@ -99,8 +99,8 @@ namespace FacInfoCheckingTool.CSharp
             XDocument config = XDocument.Load(xmlFileName);
 
             IEnumerable<string> queryModels = from item in config.Descendants("product").Descendants("model")
-                                              where (string)item.Parent.Parent.Attribute("brand").Value == comboBoxBrand.Text
-                                              select item.Value;
+                                              where (string)item.Parent.Attribute("brand").Value == comboBoxBrand.Text
+                                              select item.Attribute("name").Value;
             comboBoxModel.Text = queryModels.First();
             comboBoxModel.Items.Clear();
             foreach (string itemModel in queryModels)
