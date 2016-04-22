@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace FacInfoCheckingTool.CSharp
 {
@@ -32,6 +34,13 @@ namespace FacInfoCheckingTool.CSharp
             sw.WriteLine(DateTime.Now.ToString("HH:mm:ss > ") + log);
             sw.Close();
             sw.Dispose();
+        }
+
+        public static string Version()
+        {
+            Assembly asm = Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(asm.Location);
+            return String.Format("{0}.{1}.{2}", fvi.ProductMajorPart, fvi.ProductMinorPart, fvi.ProductBuildPart);
         }
     }
 }

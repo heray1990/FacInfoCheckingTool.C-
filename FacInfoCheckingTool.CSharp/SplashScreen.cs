@@ -75,6 +75,8 @@ namespace FacInfoCheckingTool.CSharp
                     System.Environment.Exit(0);
                 }
             }
+
+            labelVersion.Text = OutputLog.Version();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
