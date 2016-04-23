@@ -17,65 +17,28 @@ namespace FacInfoCheckingTool.CSharp
         public SplashScreen()
         {
             InitializeComponent();
+            xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
+            configXml = new ConfigXmlHandler(xmlFileName);
         }
 
-        private string brandName, modelName, swVersion;
-        private uint barcodeLength, macAddrLength, comBaudRate, comId;
-
-        public string BrandName { get { return brandName; } }
-        public string ModelName { get { return modelName; } }
-        public string SwVersion { get { return swVersion; } }
-        public uint BarcodeLength { get { return barcodeLength; } }
-        public uint MacAddrLength { get { return macAddrLength; } }
-        public uint ComBaudRate { get { return comBaudRate; } }
-        public uint ComId { get { return comId; } }
+        private string xmlFileName;
+        ConfigXmlHandler configXml;
 
         private void SplashScreen_Load(object sender, EventArgs e)
         {
-            try
+            /* Load Brand and Model from config.xml. And initialize the 
+             * items of comboBoxBrand and comboBoxModel. */
+            comboBoxBrand.Text = configXml.InitialBrandName;
+            comboBoxModel.Text = configXml.InitialModelName;
+
+            foreach (string itemBrand in configXml.GetBrandList())
             {
-                /* Load Brand and Model from config.xml. And initialize the 
-                 * items of comboBoxBrand and comboBoxModel. */
-                string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
-                XDocument config = XDocument.Load(xmlFileName);
-
-                string queryStringResult = config.Descendants("currentproduct").Descendants("brand").First().Value;
-                comboBoxBrand.Text = queryStringResult;
-
-                queryStringResult = config.Descendants("currentproduct").Descendants("model").First().Value;
-                comboBoxModel.Text = queryStringResult;
-
-                comBaudRate = uint.Parse(config.Descendants("serialport").Attributes("baud").First().Value);
-                comId = uint.Parse(config.Descendants("serialport").Attributes("id").First().Value);
-
-                IEnumerable<string> queryBrands = from item in config.Descendants("products").Descendants("product").Attributes()
-                                                  select item.Value;
-
-                foreach (string itemBrand in queryBrands)
-                {
-                    comboBoxBrand.Items.Add(itemBrand);
-                }
-
-                IEnumerable<string> queryModels = from item in config.Descendants("product").Descendants("model")
-                                                  where (string)item.Parent.Attribute("brand").Value == comboBoxBrand.Text
-                                                  select item.Attribute("name").Value;
-                foreach (string itemModel in queryModels)
-                {
-                    comboBoxModel.Items.Add(itemModel);
-                }
+                comboBoxBrand.Items.Add(itemBrand);
             }
-            catch (System.IO.FileNotFoundException ex)
+
+            foreach (string itemModel in configXml.GetModelList(comboBoxBrand.Text))
             {
-                string caption = "config.xml 文件不存在";
-                var result = MessageBox.Show(ex.Message, caption,
-                    MessageBoxButtons.OK, MessageBoxIcon.Stop);
-
-                OutputLog.SaveLogInFile(caption + ", 退出程序！");
-
-                if (result == DialogResult.OK)
-                {
-                    System.Environment.Exit(0);
-                }
+                comboBoxModel.Items.Add(itemModel);
             }
 
             labelVersion.Text = OutputLog.Version();
@@ -83,39 +46,19 @@ namespace FacInfoCheckingTool.CSharp
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            brandName = comboBoxBrand.Text;
-            modelName = comboBoxModel.Text;
-
-            string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
-            XDocument config = XDocument.Load(xmlFileName);
-
-            barcodeLength = uint.Parse((from c in config.Descendants("barcodelength")
-                                        where c.Parent.Attribute("brand").Value == brandName
-                                        select c.Value).First());
-            macAddrLength = uint.Parse((from c in config.Descendants("macaddrlength")
-                                        where c.Parent.Attribute("brand").Value == brandName
-                                        select c.Value).First());
-            swVersion = (from c in config.Descendants("swversion")
-                         where (c.Parent.Parent.Attribute("brand").Value == brandName)
-                         && (c.Parent.Attribute("name").Value == modelName)
-                         select c.Value).First();
-
-            config.Descendants("currentproduct").First().SetElementValue("brand", brandName);
-            config.Descendants("currentproduct").First().SetElementValue("model", modelName);
-            config.Save(xmlFileName);
+            ConfigXmlHandler.CurrentBrand = comboBoxBrand.Text;
+            ConfigXmlHandler.CurrentModel = comboBoxModel.Text;
+            configXml.SetCurrentBrandInXml(comboBoxBrand.Text);
+            configXml.SetCurrentModelInXml(comboBoxModel.Text);
+            configXml.SaveConfigXml();
 
             this.DialogResult = DialogResult.OK;
             this.Hide();
         }
 
         private void comboBoxBrand_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
-            XDocument config = XDocument.Load(xmlFileName);
-
-            IEnumerable<string> queryModels = from item in config.Descendants("product").Descendants("model")
-                                              where (string)item.Parent.Attribute("brand").Value == comboBoxBrand.Text
-                                              select item.Attribute("name").Value;
+        {           
+            IEnumerable<string> queryModels = configXml.RefreshModelList(comboBoxBrand.Text);
             comboBoxModel.Text = queryModels.First();
             comboBoxModel.Items.Clear();
             foreach (string itemModel in queryModels)

@@ -15,9 +15,7 @@ namespace FacInfoCheckingTool.CSharp
         {
             InitializeComponent();
         }
-
-        private string brandName;
-
+                
         private void Form1_Load(object sender, EventArgs e)
         {
             SplashScreen splashScreen = new SplashScreen();
@@ -27,17 +25,16 @@ namespace FacInfoCheckingTool.CSharp
 
             if (splashScreen.ShowDialog() == DialogResult.OK)
             {
-                brandName = splashScreen.BrandName;
-                if (brandName == "CAN")
+                if (ConfigXmlHandler.CurrentBrand == "CAN")
                 {
                     pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
                 }
-                else if(brandName == "Haier")
+                else if(ConfigXmlHandler.CurrentBrand == "Haier")
                 {
                     pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.Haier;
                 }
 
-                labelModelName.Text = splashScreen.ModelName;
+                labelModelName.Text = ConfigXmlHandler.CurrentModel;
 
                 splashScreen.Dispose();
                 this.Show();
