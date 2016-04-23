@@ -19,17 +19,16 @@ namespace FacInfoCheckingTool.CSharp
             InitializeComponent();
         }
 
-        private string brandName, modelName;
+        private string brandName, modelName, swVersion;
+        private uint barcodeLength, macAddrLength, comBaudRate, comId;
 
-        public string BrandName
-        {
-            get { return brandName; }
-        }
-
-        public string ModelName
-        {
-            get { return modelName; }
-        }
+        public string BrandName { get { return brandName; } }
+        public string ModelName { get { return modelName; } }
+        public string SwVersion { get { return swVersion; } }
+        public uint BarcodeLength { get { return barcodeLength; } }
+        public uint MacAddrLength { get { return macAddrLength; } }
+        public uint ComBaudRate { get { return comBaudRate; } }
+        public uint ComId { get { return comId; } }
 
         private void SplashScreen_Load(object sender, EventArgs e)
         {
@@ -45,6 +44,9 @@ namespace FacInfoCheckingTool.CSharp
 
                 queryStringResult = config.Descendants("currentproduct").Descendants("model").First().Value;
                 comboBoxModel.Text = queryStringResult;
+
+                comBaudRate = uint.Parse(config.Descendants("serialport").Attributes("baud").First().Value);
+                comId = uint.Parse(config.Descendants("serialport").Attributes("id").First().Value);
 
                 IEnumerable<string> queryBrands = from item in config.Descendants("products").Descendants("product").Attributes()
                                                   select item.Value;
@@ -86,6 +88,17 @@ namespace FacInfoCheckingTool.CSharp
 
             string xmlFileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\config.xml";
             XDocument config = XDocument.Load(xmlFileName);
+
+            barcodeLength = uint.Parse((from c in config.Descendants("barcodelength")
+                                        where c.Parent.Attribute("brand").Value == brandName
+                                        select c.Value).First());
+            macAddrLength = uint.Parse((from c in config.Descendants("macaddrlength")
+                                        where c.Parent.Attribute("brand").Value == brandName
+                                        select c.Value).First());
+            swVersion = (from c in config.Descendants("swversion")
+                         where (c.Parent.Parent.Attribute("brand").Value == brandName)
+                         && (c.Parent.Attribute("name").Value == modelName)
+                         select c.Value).First();
 
             config.Descendants("currentproduct").First().SetElementValue("brand", brandName);
             config.Descendants("currentproduct").First().SetElementValue("model", modelName);
