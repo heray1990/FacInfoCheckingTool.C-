@@ -176,9 +176,16 @@ namespace FacInfoCheckingTool.CSharp
                 Byte[] buf = new Byte[13];
                 comPort.Read(buf, 0, 13);
 
-                foreach(var dataTmp in buf)
+                foreach(int dataByte in buf)
                 {
-                    data = data + Convert.ToString(dataTmp, 16);
+                    if (dataByte < 16)
+                    {
+                        data = data + "0" + Convert.ToString(dataByte, 16).ToUpper() + " ";
+                    }
+                    else
+                    {
+                        data = data + Convert.ToString(dataByte, 16).ToUpper() + " ";
+                    }
                 }
                 OutputLog.ShowLog(textBoxLog, data);
             }
