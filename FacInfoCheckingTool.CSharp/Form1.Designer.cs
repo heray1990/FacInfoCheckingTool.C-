@@ -45,6 +45,7 @@
             this.labelResult = new System.Windows.Forms.Label();
             this.labelModelName = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.对比信息设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -96,7 +97,8 @@
             // 设置ToolStripMenuItem
             // 
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.串口设置ToolStripMenuItem});
+            this.串口设置ToolStripMenuItem,
+            this.对比信息设置ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -104,8 +106,9 @@
             // 串口设置ToolStripMenuItem
             // 
             this.串口设置ToolStripMenuItem.Name = "串口设置ToolStripMenuItem";
-            this.串口设置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.串口设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.串口设置ToolStripMenuItem.Text = "串口设置";
+            this.串口设置ToolStripMenuItem.Click += new System.EventHandler(this.串口设置ToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -223,6 +226,12 @@
             this.pictureBoxLogo.TabIndex = 2;
             this.pictureBoxLogo.TabStop = false;
             // 
+            // 对比信息设置ToolStripMenuItem
+            // 
+            this.对比信息设置ToolStripMenuItem.Name = "对比信息设置ToolStripMenuItem";
+            this.对比信息设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.对比信息设置ToolStripMenuItem.Text = "对比信息设置";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -271,6 +280,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label labelResult;
         private System.Windows.Forms.Label labelModelName;
+        private System.Windows.Forms.ToolStripMenuItem 对比信息设置ToolStripMenuItem;
     }
 }
 

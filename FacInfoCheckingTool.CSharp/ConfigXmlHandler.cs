@@ -16,47 +16,58 @@ namespace FacInfoCheckingTool.CSharp
         }
 
         private XDocument config;
-        private static string currentBrand, currentModel;
+        public static string currentBrand, currentModel;
+        public static string comBaudRate, comId;
         private string xmlFile;
 
-        public static string CurrentBrand
+        public string CurrentBrand
         {
             set
             {
-                currentBrand = value;
+                config.Descendants("currentproduct").First().SetElementValue("brand", value.ToString());
             }
-            get
-            {
-                return currentBrand;
-            }
-        }
-
-        public static string CurrentModel
-        {
-            set
-            {
-                currentModel = value;
-            }
-            get
-            {
-                return currentModel;
-            }
-        }
-
-        public string InitialBrandName
-        {
             get
             {
                 return config.Descendants("currentproduct").Descendants("brand").First().Value;
             }
         }
-        public string InitialModelName
+
+        public string CurrentModel
         {
+            set
+            {
+                config.Descendants("currentproduct").First().SetElementValue("model", value.ToString());
+            }
             get
             {
-                return config.Descendants("currentproduct").Descendants("model").First().Value; 
+                return config.Descendants("currentproduct").Descendants("model").First().Value;
             }
         }
+
+        public string ComBaudRate
+        {
+            set
+            {
+                config.Descendants("serialport").First().SetAttributeValue("baud", value.ToString());
+            }
+            get
+            {
+                return config.Descendants("serialport").Attributes("baud").First().Value;
+            }
+        }
+
+        public string ComId
+        {
+            set
+            {
+                config.Descendants("serialport").First().SetAttributeValue("id", value.ToString());
+            }
+            get
+            {
+                return config.Descendants("serialport").Attributes("id").First().Value;
+            }
+        }
+
         public string SwVersion
         {
             get
@@ -85,20 +96,6 @@ namespace FacInfoCheckingTool.CSharp
                                    select c.Value).First());
             }
         }
-        public uint ComBaudRate
-        {
-            get
-            {
-                return uint.Parse(config.Descendants("serialport").Attributes("baud").First().Value); ;
-            }
-        }
-        public uint ComId
-        {
-            get
-            {
-                return uint.Parse(config.Descendants("serialport").Attributes("id").First().Value);
-            }
-        }
 
         public IEnumerable<string> GetBrandList()
         {
@@ -118,16 +115,6 @@ namespace FacInfoCheckingTool.CSharp
             return from item in config.Descendants("product").Descendants("model")
                    where (string)item.Parent.Attribute("brand").Value == brandName
                    select item.Attribute("name").Value;
-        }
-
-        public void SetCurrentBrandInXml(string brandName)
-        {
-            config.Descendants("currentproduct").First().SetElementValue("brand", brandName);
-        }
-
-        public void SetCurrentModelInXml(string modelName)
-        {
-            config.Descendants("currentproduct").First().SetElementValue("model", modelName);
         }
 
         public void SaveConfigXml()

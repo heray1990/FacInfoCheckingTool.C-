@@ -25,18 +25,17 @@ namespace FacInfoCheckingTool.CSharp
 
             if (splashScreen.ShowDialog() == DialogResult.OK)
             {
-                if (ConfigXmlHandler.CurrentBrand == "CAN")
+                if (ConfigXmlHandler.currentBrand == "CAN")
                 {
                     pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
                 }
-                else if(ConfigXmlHandler.CurrentBrand == "Haier")
+                else if(ConfigXmlHandler.currentBrand == "Haier")
                 {
                     pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.Haier;
                 }
 
-                labelModelName.Text = ConfigXmlHandler.CurrentModel;
-
-                splashScreen.Dispose();
+                labelModelName.Text = ConfigXmlHandler.currentModel;
+                
                 this.Show();
             }
         }
@@ -115,6 +114,12 @@ namespace FacInfoCheckingTool.CSharp
             {
                 e.Handled = true;
             }
+        }
+
+        private void 串口设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSerialPortSetting frmSerialPortSetting = new FormSerialPortSetting();
+            frmSerialPortSetting.Show();
         }
     }
 }

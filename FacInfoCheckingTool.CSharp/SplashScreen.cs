@@ -28,8 +28,8 @@ namespace FacInfoCheckingTool.CSharp
         {
             /* Load Brand and Model from config.xml. And initialize the 
              * items of comboBoxBrand and comboBoxModel. */
-            comboBoxBrand.Text = configXml.InitialBrandName;
-            comboBoxModel.Text = configXml.InitialModelName;
+            comboBoxBrand.Text = configXml.CurrentBrand;
+            comboBoxModel.Text = configXml.CurrentModel;
 
             foreach (string itemBrand in configXml.GetBrandList())
             {
@@ -41,19 +41,22 @@ namespace FacInfoCheckingTool.CSharp
                 comboBoxModel.Items.Add(itemModel);
             }
 
+            ConfigXmlHandler.comBaudRate = configXml.ComBaudRate;
+            ConfigXmlHandler.comId = configXml.ComId;
+
             labelVersion.Text = OutputLog.Version();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            ConfigXmlHandler.CurrentBrand = comboBoxBrand.Text;
-            ConfigXmlHandler.CurrentModel = comboBoxModel.Text;
-            configXml.SetCurrentBrandInXml(comboBoxBrand.Text);
-            configXml.SetCurrentModelInXml(comboBoxModel.Text);
+            ConfigXmlHandler.currentBrand = comboBoxBrand.Text;
+            ConfigXmlHandler.currentModel = comboBoxModel.Text;
+            configXml.CurrentBrand = comboBoxBrand.Text;
+            configXml.CurrentModel = comboBoxModel.Text;
             configXml.SaveConfigXml();
 
             this.DialogResult = DialogResult.OK;
-            this.Hide();
+            this.Dispose();
         }
 
         private void comboBoxBrand_SelectedIndexChanged(object sender, EventArgs e)
