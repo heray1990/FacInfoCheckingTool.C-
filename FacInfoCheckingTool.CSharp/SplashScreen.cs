@@ -26,20 +26,31 @@ namespace FacInfoCheckingTool.CSharp
 
         private void SplashScreen_Load(object sender, EventArgs e)
         {
+            int index = 0;
+
             /* Load Brand and Model from config.xml. And initialize the 
              * items of comboBoxBrand and comboBoxModel. */
-            comboBoxBrand.Text = configXml.CurrentBrand;
-            comboBoxModel.Text = configXml.CurrentModel;
-
             foreach (string itemBrand in configXml.GetBrandList())
             {
                 comboBoxBrand.Items.Add(itemBrand);
+
+                if (itemBrand == configXml.CurrentBrand)
+                {
+                    index = configXml.GetBrandList().ToList().IndexOf(itemBrand);
+                }
             }
+            comboBoxBrand.SelectedIndex = index;
 
             foreach (string itemModel in configXml.GetModelList(comboBoxBrand.Text))
             {
                 comboBoxModel.Items.Add(itemModel);
+
+                if (itemModel == configXml.CurrentModel)
+                {
+                    index = configXml.GetModelList(comboBoxBrand.Text).ToList().IndexOf(itemModel);
+                }
             }
+            comboBoxModel.SelectedIndex = index;
 
             ConfigXmlHandler.comBaudRate = configXml.ComBaudRate;
             ConfigXmlHandler.comId = configXml.ComId;
@@ -62,12 +73,12 @@ namespace FacInfoCheckingTool.CSharp
         private void comboBoxBrand_SelectedIndexChanged(object sender, EventArgs e)
         {           
             IEnumerable<string> queryModels = configXml.RefreshModelList(comboBoxBrand.Text);
-            comboBoxModel.Text = queryModels.First();
             comboBoxModel.Items.Clear();
             foreach (string itemModel in queryModels)
             {
                 comboBoxModel.Items.Add(itemModel);
             }
+            comboBoxModel.SelectedIndex = 0;
         }
     }
 }
