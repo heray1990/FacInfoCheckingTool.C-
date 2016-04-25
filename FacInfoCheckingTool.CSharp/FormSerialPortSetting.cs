@@ -22,7 +22,7 @@ namespace FacInfoCheckingTool.CSharp
         private void FormSerialPortSetting_Load(object sender, EventArgs e)
         {
             comboBoxBaudRate.Text = ConfigXmlHandler.comBaudRate;
-            comboBoxComId.Text = "COM" + ConfigXmlHandler.comId.ToString();
+            comboBoxComId.Text = "COM" + ConfigXmlHandler.comId;
 
             string[] ports = SerialPort.GetPortNames();
             foreach (string port in ports)
@@ -40,6 +40,14 @@ namespace FacInfoCheckingTool.CSharp
             configXml.ComId = comboBoxComId.Text.Substring(3);
             configXml.SaveConfigXml();
 
+            ConfigXmlHandler.comBaudRate = comboBoxBaudRate.Text;
+            ConfigXmlHandler.comId = comboBoxComId.Text.Substring(3);
+
+            this.Hide();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
             this.Hide();
         }
     }
