@@ -21,14 +21,22 @@ namespace FacInfoCheckingTool.CSharp
 
         private void FormSerialPortSetting_Load(object sender, EventArgs e)
         {
+            int index = 0;
+
             comboBoxBaudRate.Text = ConfigXmlHandler.comBaudRate;
-            comboBoxComId.Text = "COM" + ConfigXmlHandler.comId;
 
             string[] ports = SerialPort.GetPortNames();
-            foreach (string port in ports)
+            for (int i = 0; i < ports.Count(); i++)
             {
-                comboBoxComId.Items.Add(port);
+                comboBoxComId.Items.Add(ports[i]);
+                
+                if (ports[i] == "COM" + ConfigXmlHandler.comId)
+                {
+                    index = i;
+                }
             }
+
+            comboBoxComId.SelectedIndex = index;
         }
 
         private void buttonOk_Click(object sender, EventArgs e)

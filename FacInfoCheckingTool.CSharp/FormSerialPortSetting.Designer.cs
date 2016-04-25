@@ -53,6 +53,7 @@
             // 
             // comboBoxComId
             // 
+            this.comboBoxComId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxComId.FormattingEnabled = true;
             this.comboBoxComId.Location = new System.Drawing.Point(78, 53);
             this.comboBoxComId.Name = "comboBoxComId";
