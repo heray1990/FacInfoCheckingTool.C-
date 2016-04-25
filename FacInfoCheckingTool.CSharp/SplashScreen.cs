@@ -41,13 +41,15 @@ namespace FacInfoCheckingTool.CSharp
             }
             comboBoxBrand.SelectedIndex = index;
 
-            foreach (string itemModel in configXml.GetModelList(comboBoxBrand.Text))
+            comboBoxModel.Items.Clear();
+            IEnumerable<string> modelList = configXml.GetModelList(comboBoxBrand.Text);
+            foreach (string itemModel in modelList)
             {
                 comboBoxModel.Items.Add(itemModel);
 
                 if (itemModel == configXml.CurrentModel)
                 {
-                    index = configXml.GetModelList(comboBoxBrand.Text).ToList().IndexOf(itemModel);
+                    index = modelList.ToList().IndexOf(itemModel);
                 }
             }
             comboBoxModel.SelectedIndex = index;
