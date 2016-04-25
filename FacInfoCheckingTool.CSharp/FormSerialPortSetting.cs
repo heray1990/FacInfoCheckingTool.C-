@@ -33,16 +33,15 @@ namespace FacInfoCheckingTool.CSharp
             comboBoxBaudRate.SelectedIndex = index;
 
             string[] ports = SerialPort.GetPortNames();
-            for (int i = 0; i < ports.Count(); i++)
+            foreach (string port in ports)
             {
-                comboBoxComId.Items.Add(ports[i]);
-                
-                if (ports[i] == "COM" + ConfigXmlHandler.comId)
+                comboBoxComId.Items.Add(port);
+
+                if (port == "COM" + ConfigXmlHandler.comId)
                 {
-                    index = i;
+                    index = ports.ToList().IndexOf(port);
                 }
             }
-
             comboBoxComId.SelectedIndex = index;
         }
 
