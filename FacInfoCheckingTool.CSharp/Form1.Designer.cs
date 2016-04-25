@@ -33,8 +33,9 @@
             this.watermarkTextBoxMacAddr = new FacInfoCheckingTool.CSharp.WatermarkTextBox();
             this.watermarkTextBoxBarcode = new FacInfoCheckingTool.CSharp.WatermarkTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.串口设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TVSerialPortSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.InfoSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelSwVer = new System.Windows.Forms.Label();
             this.labelMacAddr = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.labelResult = new System.Windows.Forms.Label();
             this.labelModelName = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
-            this.对比信息设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -87,28 +87,34 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.设置ToolStripMenuItem});
+            this.SettingToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(357, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // 设置ToolStripMenuItem
+            // SettingToolStripMenuItem
             // 
-            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.串口设置ToolStripMenuItem,
-            this.对比信息设置ToolStripMenuItem});
-            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.设置ToolStripMenuItem.Text = "设置";
+            this.SettingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TVSerialPortSettingToolStripMenuItem,
+            this.InfoSettingToolStripMenuItem});
+            this.SettingToolStripMenuItem.Name = "SettingToolStripMenuItem";
+            this.SettingToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.SettingToolStripMenuItem.Text = "设置";
             // 
-            // 串口设置ToolStripMenuItem
+            // TVSerialPortSettingToolStripMenuItem
             // 
-            this.串口设置ToolStripMenuItem.Name = "串口设置ToolStripMenuItem";
-            this.串口设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.串口设置ToolStripMenuItem.Text = "串口设置";
-            this.串口设置ToolStripMenuItem.Click += new System.EventHandler(this.串口设置ToolStripMenuItem_Click);
+            this.TVSerialPortSettingToolStripMenuItem.Name = "TVSerialPortSettingToolStripMenuItem";
+            this.TVSerialPortSettingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.TVSerialPortSettingToolStripMenuItem.Text = "电视串口设置";
+            this.TVSerialPortSettingToolStripMenuItem.Click += new System.EventHandler(this.TVSerialPortSettingToolStripMenuItem_Click);
+            // 
+            // InfoSettingToolStripMenuItem
+            // 
+            this.InfoSettingToolStripMenuItem.Name = "InfoSettingToolStripMenuItem";
+            this.InfoSettingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.InfoSettingToolStripMenuItem.Text = "对比信息设置";
             // 
             // tableLayoutPanel1
             // 
@@ -226,12 +232,6 @@
             this.pictureBoxLogo.TabIndex = 2;
             this.pictureBoxLogo.TabStop = false;
             // 
-            // 对比信息设置ToolStripMenuItem
-            // 
-            this.对比信息设置ToolStripMenuItem.Name = "对比信息设置ToolStripMenuItem";
-            this.对比信息设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.对比信息设置ToolStripMenuItem.Text = "对比信息设置";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -266,8 +266,8 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 串口设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SettingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TVSerialPortSettingToolStripMenuItem;
         private WatermarkTextBox watermarkTextBoxBarcode;
         private WatermarkTextBox watermarkTextBoxMacAddr;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
@@ -280,7 +280,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label labelResult;
         private System.Windows.Forms.Label labelModelName;
-        private System.Windows.Forms.ToolStripMenuItem 对比信息设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem InfoSettingToolStripMenuItem;
     }
 }
 

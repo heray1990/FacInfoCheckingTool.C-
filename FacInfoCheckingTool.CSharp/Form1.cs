@@ -116,7 +116,7 @@ namespace FacInfoCheckingTool.CSharp
             }
         }
 
-        private void 串口设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TVSerialPortSettingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormSerialPortSetting frmSerialPortSetting = new FormSerialPortSetting();
             frmSerialPortSetting.Show();
