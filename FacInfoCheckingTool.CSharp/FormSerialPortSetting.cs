@@ -30,7 +30,7 @@ namespace FacInfoCheckingTool.CSharp
             {
                 comboBoxComId.Items.Add(port);
 
-                if (port == "COM" + ConfigXmlHandler.comId)
+                if (port == ConfigXmlHandler.comId)
                 {
                     index = ports.ToList().IndexOf(port);
                 }
@@ -44,11 +44,11 @@ namespace FacInfoCheckingTool.CSharp
             ConfigXmlHandler configXml = new ConfigXmlHandler(xmlFileName);
 
             configXml.ComBaudRate = comboBoxBaudRate.Text;
-            configXml.ComId = comboBoxComId.Text.Substring(3);
+            configXml.ComId = comboBoxComId.Text;
             configXml.SaveConfigXml();
 
             ConfigXmlHandler.comBaudRate = comboBoxBaudRate.Text;
-            ConfigXmlHandler.comId = comboBoxComId.Text.Substring(3);
+            ConfigXmlHandler.comId = comboBoxComId.Text;
 
             this.Hide();
         }
