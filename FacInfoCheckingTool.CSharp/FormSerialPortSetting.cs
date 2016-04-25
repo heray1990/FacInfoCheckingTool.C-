@@ -22,15 +22,8 @@ namespace FacInfoCheckingTool.CSharp
         private void FormSerialPortSetting_Load(object sender, EventArgs e)
         {
             int index = 0;
-            
-            foreach (string item in comboBoxBaudRate.Items)
-            {
-                if (item == ConfigXmlHandler.comBaudRate)
-                {
-                    index = comboBoxBaudRate.Items.IndexOf(item);
-                }
-            }
-            comboBoxBaudRate.SelectedIndex = index;
+
+            comboBoxBaudRate.Text = ConfigXmlHandler.comBaudRate;
 
             string[] ports = SerialPort.GetPortNames();
             foreach (string port in ports)
