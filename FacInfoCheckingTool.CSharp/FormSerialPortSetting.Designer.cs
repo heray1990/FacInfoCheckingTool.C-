@@ -62,6 +62,7 @@
             // 
             // comboBoxBaudRate
             // 
+            this.comboBoxBaudRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBaudRate.FormattingEnabled = true;
             this.comboBoxBaudRate.Items.AddRange(new object[] {
             "9600",
