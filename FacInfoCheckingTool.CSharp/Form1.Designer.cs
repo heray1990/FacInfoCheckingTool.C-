@@ -106,14 +106,14 @@
             // TVSerialPortSettingToolStripMenuItem
             // 
             this.TVSerialPortSettingToolStripMenuItem.Name = "TVSerialPortSettingToolStripMenuItem";
-            this.TVSerialPortSettingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.TVSerialPortSettingToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.TVSerialPortSettingToolStripMenuItem.Text = "电视串口设置";
             this.TVSerialPortSettingToolStripMenuItem.Click += new System.EventHandler(this.TVSerialPortSettingToolStripMenuItem_Click);
             // 
             // InfoSettingToolStripMenuItem
             // 
             this.InfoSettingToolStripMenuItem.Name = "InfoSettingToolStripMenuItem";
-            this.InfoSettingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.InfoSettingToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.InfoSettingToolStripMenuItem.Text = "对比信息设置";
             // 
             // tableLayoutPanel1
@@ -249,6 +249,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "工厂信息检验工具";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

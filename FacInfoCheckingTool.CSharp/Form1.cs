@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO.Ports;
 
 namespace FacInfoCheckingTool.CSharp
 {
@@ -14,8 +15,11 @@ namespace FacInfoCheckingTool.CSharp
         public Form1()
         {
             InitializeComponent();
+            comPort.DataReceived += new SerialDataReceivedEventHandler(comPort_DataReceived);
         }
-                
+
+        private SerialPort comPort = new SerialPort();
+
         private void Form1_Load(object sender, EventArgs e)
         {
             SplashScreen splashScreen = new SplashScreen();
@@ -86,6 +90,32 @@ namespace FacInfoCheckingTool.CSharp
                 {
                     watermarkTextBoxMacAddr.ReadOnly = true;
                     textBoxLog.Focus();
+
+                    try
+                    {
+                        if (comPort.IsOpen) comPort.Close();
+                        else
+                        {
+                            // Serial Port setting
+                            comPort.BaudRate = int.Parse(ConfigXmlHandler.comBaudRate);
+                            comPort.PortName = ConfigXmlHandler.comId;
+                            comPort.DataBits = 8;
+                            comPort.ReadTimeout = 100;
+                            comPort.Open();
+
+                            Byte[] command = { 0x55, 0x2E, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD0, 0xFE };
+                            comPort.Write(command, 0, 12);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        watermarkTextBoxBarcode.ReadOnly = false;
+                        watermarkTextBoxBarcode.Text = "";
+                        watermarkTextBoxBarcode.Focus();
+                        watermarkTextBoxMacAddr.ReadOnly = false;
+                        watermarkTextBoxMacAddr.Text = "";
+                    }
                 }
                 else
                 {
@@ -120,6 +150,42 @@ namespace FacInfoCheckingTool.CSharp
         {
             FormSerialPortSetting frmSerialPortSetting = new FormSerialPortSetting();
             frmSerialPortSetting.Show();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (comPort.IsOpen)
+                {
+                    comPort.ReadExisting();
+                    comPort.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void comPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                string data = "";
+                Byte[] buf = new Byte[13];
+                comPort.Read(buf, 0, 13);
+
+                foreach(var dataTmp in buf)
+                {
+                    data = data + Convert.ToString(dataTmp, 16);
+                }
+                OutputLog.ShowLog(textBoxLog, data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
