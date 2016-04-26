@@ -189,14 +189,7 @@ namespace FacInfoCheckingTool.CSharp
 
                 foreach (int dataByte in buf)
                 {
-                    if (dataByte < 16)
-                    {
-                        data = data + "0" + Convert.ToString(dataByte, 16).ToUpper() + " ";
-                    }
-                    else
-                    {
-                        data = data + Convert.ToString(dataByte, 16).ToUpper() + " ";
-                    }
+                    data = data + dataByte.ToString("X2").ToUpper() + " ";
                 }
                 OutputLog.ShowLog(textBoxLog, data);
             }
