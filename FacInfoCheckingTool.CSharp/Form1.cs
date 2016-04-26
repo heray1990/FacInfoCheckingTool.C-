@@ -19,6 +19,7 @@ namespace FacInfoCheckingTool.CSharp
         }
 
         private SerialPort comPort = new SerialPort();
+        private ICommands command;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -31,11 +32,18 @@ namespace FacInfoCheckingTool.CSharp
             {
                 if (ConfigXmlHandler.currentBrand == "CAN")
                 {
+                    command = new CANTVCommands();
                     pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
                 }
                 else if(ConfigXmlHandler.currentBrand == "Haier")
                 {
+                    command = new CANTVCommands();
                     pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.Haier;
+                }
+                else
+                {
+                    command = new CANTVCommands();
+                    pictureBoxLogo.Image = global::FacInfoCheckingTool.CSharp.Properties.Resources.CANTV;
                 }
 
                 labelModelName.Text = ConfigXmlHandler.currentModel;
@@ -103,8 +111,7 @@ namespace FacInfoCheckingTool.CSharp
                             comPort.ReadTimeout = 100;
                             comPort.Open();
 
-                            Byte[] command = { 0x55, 0x2E, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD0, 0xFE };
-                            comPort.Write(command, 0, 12);
+                            comPort.Write(command.ReadMacAddr(), 0, 12);
                         }
                     }
                     catch (Exception ex)
