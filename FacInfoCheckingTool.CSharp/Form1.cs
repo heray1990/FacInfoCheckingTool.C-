@@ -20,6 +20,8 @@ namespace FacInfoCheckingTool.CSharp
 
         private SerialPort comPort = new SerialPort();
         private ICommands command;
+        private bool isAllPass = true;
+        private bool isCmdDataRecv = false;        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -111,7 +113,7 @@ namespace FacInfoCheckingTool.CSharp
                             comPort.ReadTimeout = 100;
                             comPort.Open();
 
-                            comPort.Write(command.ReadMacAddr(), 0, 12);
+                            MainTask();
                         }
                     }
                     catch (Exception ex)
@@ -183,7 +185,9 @@ namespace FacInfoCheckingTool.CSharp
                 Byte[] buf = new Byte[13];
                 comPort.Read(buf, 0, 13);
 
-                foreach(int dataByte in buf)
+                isCmdDataRecv = true;
+
+                foreach (int dataByte in buf)
                 {
                     if (dataByte < 16)
                     {
@@ -199,6 +203,44 @@ namespace FacInfoCheckingTool.CSharp
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void MainTask()
+        {            
+            isAllPass = true;
+            isCmdDataRecv = false;
+            labelMacAddr.BackColor = Color.White;
+            labelSwVer.BackColor = Color.White;
+            labelResult.BackColor = Color.White;
+            labelResult.Text = "Checking";
+            
+            CmdSendingEngine(command.ReadMacAddr());
+            isCmdDataRecv = false;
+            CmdSendingEngine(command.ReadSwVer());
+            isCmdDataRecv = false;
+        }
+
+        private void CmdSendingEngine(byte[] CmdByte)
+        {
+            int i = 0;
+
+            while (!(isCmdDataRecv) && (i <= 3))
+            {
+                i++;
+                comPort.Write(CmdByte, 0, command.CmdLength);
+                DelayMillisecond(500);                
+            } 
+        }
+
+        private void DelayMillisecond(int millisecond)
+        {
+            int start = Environment.TickCount;
+
+            while (Math.Abs(Environment.TickCount - start) < millisecond)
+            {
+                if (isCmdDataRecv) { break; }
+                Application.DoEvents();
             }
         }
     }
