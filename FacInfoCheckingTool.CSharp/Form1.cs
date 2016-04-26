@@ -182,16 +182,24 @@ namespace FacInfoCheckingTool.CSharp
             try
             {
                 string data = "";
-                Byte[] buf = new Byte[13];
-                comPort.Read(buf, 0, 13);
+                int n = comPort.BytesToRead;
+                Byte[] buf = new Byte[n];
+                comPort.Read(buf, 0, n);
 
                 isCmdDataRecv = true;
 
-                foreach (int dataByte in buf)
+                if (buf[0] == 0x55 && ((buf[1] == 0xB0) || (buf[1] == 0xB2) || (buf[1] == 0xB4)))
                 {
-                    data = data + dataByte.ToString("X2").ToUpper() + " ";
+                    foreach (int dataByte in buf)
+                    {
+                        data = data + dataByte.ToString("X2").ToUpper() + " ";
+                    }
+                    OutputLog.ShowLog(textBoxLog, data);
                 }
-                OutputLog.ShowLog(textBoxLog, data);
+                else
+                {
+                    OutputLog.ShowLog(textBoxLog, "Unknown data!");
+                }
             }
             catch (Exception ex)
             {
