@@ -9,7 +9,10 @@ namespace FacInfoCheckingTool.CSharp
     {
         int CommandIdx { set; get; }
         int CmdLength { get; }
-        Byte[] ReadMacAddr();
+        Byte[] ReadMacAddr();        
         Byte[] ReadSwVer();
+        string ParseMacAddrData(Byte[] buffer);
+        string ParseSwVerData(Byte[] buffer);
+        bool isCmdHeaderCorrect(Byte[] buffer);
     }
 }

@@ -188,7 +188,7 @@ namespace FacInfoCheckingTool.CSharp
 
                 isCmdDataRecv = true;
 
-                if (buf[0] == 0x55 && ((buf[1] == 0xB0) || (buf[1] == 0xB2) || (buf[1] == 0xB4)))
+                if (command.isCmdHeaderCorrect(buf))
                 {
                     command.CommandIdx++;
                     foreach (Byte dataByte in buf)
@@ -201,14 +201,7 @@ namespace FacInfoCheckingTool.CSharp
                         this.Invoke((EventHandler)(delegate
                         {
                             OutputLog.ShowLog(textBoxLog, "[TV]MAC Address: " + data);
-                            data = "";
-                            for (int i = 0; i <= n; i++)
-                            {
-                                if ((i >= 3) && (i <= 8))
-                                {
-                                    data = data + buf[i].ToString("X2").ToUpper();
-                                }
-                            }
+                            data = command.ParseMacAddrData(buf);
                             labelMacAddr.Text = data;
                             if (data == watermarkTextBoxMacAddr.Text.ToUpper())
                             {
@@ -227,16 +220,7 @@ namespace FacInfoCheckingTool.CSharp
                         this.Invoke((EventHandler)(delegate
                         {
                             OutputLog.ShowLog(textBoxLog, "[TV]Software Version: " + data);
-                            data = "";
-                            Byte[] bufTmp = new Byte[n];
-                            for (int i = 0; i <= n; i++)
-                            {
-                                if ((i >= 3) && (i <= 8))
-                                {                                    
-                                    bufTmp[i - 3] = buf[i];
-                                }
-                            }
-                            data = data + Encoding.ASCII.GetString(bufTmp);
+                            data = command.ParseSwVerData(buf);
                             labelSwVer.Text = data;
                             labelSwVer.BackColor = Color.Green;
                             isAllPass = true && isAllPass;
