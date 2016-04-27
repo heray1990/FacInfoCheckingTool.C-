@@ -34,7 +34,10 @@ namespace FacInfoCheckingTool.CSharp
                     index = ports.ToList().IndexOf(port);
                 }
             }
-            comboBoxComId.SelectedIndex = index;
+            if (ports.Count() > 0)
+            {
+                comboBoxComId.SelectedIndex = index;
+            }
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
