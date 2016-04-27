@@ -12,6 +12,7 @@ namespace FacInfoCheckingTool.CSharp
 
         public int CommandIdx
         {
+            set { CANTVCommandIdx = value; }
             get { return CANTVCommandIdx; }
         }
 
@@ -22,14 +23,12 @@ namespace FacInfoCheckingTool.CSharp
 
         Byte[] ICommands.ReadMacAddr()
         {
-            CANTVCommandIdx = 1;
             Byte[] command =  { 0x55, 0xD8, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x27, 0xFE };
             return command; 
         }
 
         Byte[] ICommands.ReadSwVer()
         {
-            CANTVCommandIdx = 2;
             Byte[] command = { 0x55, 0x29, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD7, 0xFE };
             return command;
         }

@@ -190,6 +190,7 @@ namespace FacInfoCheckingTool.CSharp
 
                 if (buf[0] == 0x55 && ((buf[1] == 0xB0) || (buf[1] == 0xB2) || (buf[1] == 0xB4)))
                 {
+                    command.CommandIdx++;
                     foreach (int dataByte in buf)
                     {
                         data = data + dataByte.ToString("X2").ToUpper() + " ";
@@ -199,6 +200,19 @@ namespace FacInfoCheckingTool.CSharp
                 else
                 {
                     OutputLog.ShowLog(textBoxLog, "Unknown data!");
+                }
+                
+                if (command.CommandIdx == 1)
+                {
+                    this.Invoke((EventHandler)(delegate { labelMacAddr.Text = data; }));
+                }
+                else if (command.CommandIdx == 2)
+                {
+                    this.Invoke((EventHandler)(delegate { labelSwVer.Text = data; }));
+                }
+                else
+                {
+                    this.Invoke((EventHandler)(delegate { labelMacAddr.Text = data; }));
                 }
             }
             catch (Exception ex)
@@ -230,7 +244,7 @@ namespace FacInfoCheckingTool.CSharp
             {
                 i++;
                 comPort.Write(CmdByte, 0, command.CmdLength);
-                DelayMillisecond(500);                
+                DelayMillisecond(500);
             } 
         }
 

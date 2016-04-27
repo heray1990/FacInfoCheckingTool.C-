@@ -7,7 +7,7 @@ namespace FacInfoCheckingTool.CSharp
 {
     interface ICommands
     {
-        int CommandIdx { get; }
+        int CommandIdx { set; get; }
         int CmdLength { get; }
         Byte[] ReadMacAddr();
         Byte[] ReadSwVer();

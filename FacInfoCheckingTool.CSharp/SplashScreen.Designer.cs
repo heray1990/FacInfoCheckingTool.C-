@@ -55,7 +55,7 @@
             this.comboBoxBrand.Location = new System.Drawing.Point(79, 90);
             this.comboBoxBrand.Name = "comboBoxBrand";
             this.comboBoxBrand.Size = new System.Drawing.Size(71, 20);
-            this.comboBoxBrand.TabIndex = 1;
+            this.comboBoxBrand.TabIndex = 2;
             this.comboBoxBrand.SelectedIndexChanged += new System.EventHandler(this.comboBoxBrand_SelectedIndexChanged);
             // 
             // comboBoxModel
@@ -65,7 +65,7 @@
             this.comboBoxModel.Location = new System.Drawing.Point(156, 90);
             this.comboBoxModel.Name = "comboBoxModel";
             this.comboBoxModel.Size = new System.Drawing.Size(80, 20);
-            this.comboBoxModel.TabIndex = 2;
+            this.comboBoxModel.TabIndex = 3;
             // 
             // labelVersion
             // 
@@ -86,7 +86,7 @@
             this.buttonStart.Location = new System.Drawing.Point(122, 140);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
-            this.buttonStart.TabIndex = 4;
+            this.buttonStart.TabIndex = 1;
             this.buttonStart.Text = "开始（&S）";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
