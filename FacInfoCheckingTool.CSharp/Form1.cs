@@ -49,8 +49,7 @@ namespace FacInfoCheckingTool.CSharp
                 }
 
                 labelModelName.Text = ConfigXmlHandler.currentModel;
-
-                InitSerialPortSetting();
+                
                 this.Show();
             }
         }
@@ -103,11 +102,7 @@ namespace FacInfoCheckingTool.CSharp
                     textBoxLog.Focus();
 
                     try
-                    {
-                        if (!comPort.IsOpen)
-                        {
-                            comPort.Open();                            
-                        }
+                    {                        
                         MainTask();
                     }
                     catch (Exception ex)
@@ -248,13 +243,13 @@ namespace FacInfoCheckingTool.CSharp
         private void InitSerialPortSetting()
         {
             // Serial Port setting
-            if (comPort.IsOpen) comPort.Close();
-            else
+            if (!comPort.IsOpen)
             {
                 comPort.BaudRate = int.Parse(ConfigXmlHandler.comBaudRate);
                 comPort.PortName = ConfigXmlHandler.comId;
                 comPort.DataBits = 8;
                 comPort.ReadTimeout = 100;
+                comPort.Open();
             }
         }
 
@@ -269,7 +264,8 @@ namespace FacInfoCheckingTool.CSharp
             labelSwVer.BackColor = Color.White;
             labelResult.BackColor = Color.White;
             labelResult.Text = "Checking";
-            
+
+            InitSerialPortSetting();            
             CmdSendingEngine(command.ReadMacAddr());
             DelayMillisecond(500);
             isCmdDataRecv = false;
