@@ -191,29 +191,52 @@ namespace FacInfoCheckingTool.CSharp
                 if (buf[0] == 0x55 && ((buf[1] == 0xB0) || (buf[1] == 0xB2) || (buf[1] == 0xB4)))
                 {
                     command.CommandIdx++;
-                    foreach (int dataByte in buf)
+                    foreach (Byte dataByte in buf)
                     {
                         data = data + dataByte.ToString("X2").ToUpper() + " ";
                     }
-                    OutputLog.ShowLog(textBoxLog, data);
+
+                    if (command.CommandIdx == 1)
+                    {
+                        this.Invoke((EventHandler)(delegate
+                        {
+                            OutputLog.ShowLog(textBoxLog, "[TV]MAC Address: " + data);
+                            data = "";
+                            for (int i = 0; i <= n; i++)
+                            {
+                                if ((i >= 3) && (i <= 8))
+                                {
+                                    data = data + buf[i].ToString("X2").ToUpper() + " ";
+                                }
+                            }
+                            labelMacAddr.Text = data;
+                            labelMacAddr.BackColor = Color.Green;
+                        }));
+                    }
+                    else if (command.CommandIdx == 2)
+                    {
+                        this.Invoke((EventHandler)(delegate
+                        {
+                            OutputLog.ShowLog(textBoxLog, "[TV]Software Version: " + data);
+                            data = "";
+                            Byte[] bufTmp = new Byte[n];
+                            for (int i = 0; i <= n; i++)
+                            {
+                                if ((i >= 3) && (i <= 8))
+                                {                                    
+                                    bufTmp[i - 3] = buf[i];
+                                }
+                            }
+                            data = data + Encoding.ASCII.GetString(bufTmp);
+                            labelSwVer.Text = data;
+                            labelSwVer.BackColor = Color.Green;
+                        }));
+                    }
                 }
                 else
                 {
                     OutputLog.ShowLog(textBoxLog, "Unknown data!");
-                }
-                
-                if (command.CommandIdx == 1)
-                {
-                    this.Invoke((EventHandler)(delegate { labelMacAddr.Text = data; }));
-                }
-                else if (command.CommandIdx == 2)
-                {
-                    this.Invoke((EventHandler)(delegate { labelSwVer.Text = data; }));
-                }
-                else
-                {
-                    this.Invoke((EventHandler)(delegate { labelMacAddr.Text = data; }));
-                }
+                }                                
             }
             catch (Exception ex)
             {
