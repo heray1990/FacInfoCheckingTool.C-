@@ -190,7 +190,6 @@ namespace FacInfoCheckingTool.CSharp
 
                 if (command.isCmdHeaderCorrect(buf))
                 {
-                    command.CommandIdx++;
                     foreach (Byte dataByte in buf)
                     {
                         data = data + dataByte.ToString("X2").ToUpper() + " ";
@@ -222,26 +221,16 @@ namespace FacInfoCheckingTool.CSharp
                             OutputLog.ShowLog(textBoxLog, "[TV]Software Version: " + data);
                             data = command.ParseSwVerData(buf);
                             labelSwVer.Text = data;
-                            labelSwVer.BackColor = Color.Green;
-                            isAllPass = true && isAllPass;
-
-                            if (isAllPass)
+                            if (data == "---")
                             {
-                                labelResult.Text = "PASS";
-                                labelResult.BackColor = Color.Green;
+                                labelSwVer.BackColor = Color.Green;
+                                isAllPass = true && isAllPass;
                             }
                             else
                             {
-                                labelResult.Text = "NG";
-                                labelResult.BackColor = Color.Red;
-                            }
-
-                            watermarkTextBoxBarcode.ReadOnly = false;
-                            watermarkTextBoxBarcode.Text = "";
-                            watermarkTextBoxBarcode.Focus();
-                            watermarkTextBoxMacAddr.ReadOnly = false;
-                            watermarkTextBoxMacAddr.Text = "";
-                            command.CommandIdx = 0;
+                                labelSwVer.BackColor = Color.Red;
+                                isAllPass = false;
+                            }                            
                         }));
                     }
                 }
@@ -282,9 +271,29 @@ namespace FacInfoCheckingTool.CSharp
             labelResult.Text = "Checking";
             
             CmdSendingEngine(command.ReadMacAddr());
+            DelayMillisecond(500);
             isCmdDataRecv = false;
             CmdSendingEngine(command.ReadSwVer());
-            isCmdDataRecv = false;            
+            DelayMillisecond(500);
+            isCmdDataRecv = false;
+
+            if (isAllPass)
+            {
+                labelResult.Text = "PASS";
+                labelResult.BackColor = Color.Green;
+            }
+            else
+            {
+                labelResult.Text = "NG";
+                labelResult.BackColor = Color.Red;
+            }
+
+            watermarkTextBoxBarcode.ReadOnly = false;
+            watermarkTextBoxBarcode.Text = "";
+            watermarkTextBoxBarcode.Focus();
+            watermarkTextBoxMacAddr.ReadOnly = false;
+            watermarkTextBoxMacAddr.Text = "";
+            command.CommandIdx = 0;
         }
 
         private void CmdSendingEngine(byte[] CmdByte)
@@ -308,6 +317,16 @@ namespace FacInfoCheckingTool.CSharp
                 if (isCmdDataRecv) { break; }
                 Application.DoEvents();
             }
-        }        
+        }
+
+        private void DelayMillisecond(int millisecond)
+        {
+            int start = Environment.TickCount;
+
+            while (Math.Abs(Environment.TickCount - start) < millisecond)
+            {
+                Application.DoEvents();
+            }
+        }
     }
 }
