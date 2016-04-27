@@ -96,7 +96,7 @@ namespace FacInfoCheckingTool.CSharp
         {
             if (e.KeyChar == 13)
             {
-                if (watermarkTextBoxMacAddr.Text.Length == 1)
+                if (watermarkTextBoxMacAddr.Text.Length == 12)
                 {
                     watermarkTextBoxMacAddr.ReadOnly = true;
                     textBoxLog.Focus();
@@ -206,11 +206,20 @@ namespace FacInfoCheckingTool.CSharp
                             {
                                 if ((i >= 3) && (i <= 8))
                                 {
-                                    data = data + buf[i].ToString("X2").ToUpper() + " ";
+                                    data = data + buf[i].ToString("X2").ToUpper();
                                 }
                             }
                             labelMacAddr.Text = data;
-                            labelMacAddr.BackColor = Color.Green;
+                            if (data == watermarkTextBoxMacAddr.Text.ToUpper())
+                            {
+                                labelMacAddr.BackColor = Color.Green;
+                                isAllPass = true && isAllPass;
+                            }
+                            else
+                            {
+                                labelMacAddr.BackColor = Color.Red;
+                                isAllPass = false;
+                            }
                         }));
                     }
                     else if (command.CommandIdx == 2)
@@ -230,6 +239,18 @@ namespace FacInfoCheckingTool.CSharp
                             data = data + Encoding.ASCII.GetString(bufTmp);
                             labelSwVer.Text = data;
                             labelSwVer.BackColor = Color.Green;
+                            isAllPass = true && isAllPass;
+
+                            if (isAllPass)
+                            {
+                                labelResult.Text = "PASS";
+                                labelResult.BackColor = Color.Green;
+                            }
+                            else
+                            {
+                                labelResult.Text = "NG";
+                                labelResult.BackColor = Color.Red;
+                            }
                         }));
                     }
                 }
@@ -256,7 +277,7 @@ namespace FacInfoCheckingTool.CSharp
             CmdSendingEngine(command.ReadMacAddr());
             isCmdDataRecv = false;
             CmdSendingEngine(command.ReadSwVer());
-            isCmdDataRecv = false;
+            isCmdDataRecv = false;            
         }
 
         private void CmdSendingEngine(byte[] CmdByte)
@@ -267,11 +288,11 @@ namespace FacInfoCheckingTool.CSharp
             {
                 i++;
                 comPort.Write(CmdByte, 0, command.CmdLength);
-                DelayMillisecond(500);
+                DelayMillisecondForCmd(500);
             } 
         }
 
-        private void DelayMillisecond(int millisecond)
+        private void DelayMillisecondForCmd(int millisecond)
         {
             int start = Environment.TickCount;
 
