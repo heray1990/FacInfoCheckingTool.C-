@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
+  <serialport baud="115200" id="COM1" />
   <currentproduct>
     <brand>CAN</brand>
     <model>C49S</model>
@@ -9,28 +10,33 @@
       <barcodelength>1</barcodelength>
       <macaddrlength>12</macaddrlength>
       <model name="C42S">
-        <swversion>V2.2.5</swversion>
+        <macaddr enable="true" />
+        <swversion enable="true">V2.2.5</swversion>
       </model>
       <model name="C49S">
-        <swversion>V2.3.3</swversion>
+        <macaddr enable="true" />
+        <swversion enable="true">V2.3.3</swversion>
       </model>
       <model name="C43C">
-        <swversion>V0.0.3</swversion>
+        <macaddr enable="true" />
+        <swversion enable="true">V0.0.9</swversion>
       </model>
       <model name="C49C">
-        <swversion>V2.3.3</swversion>
+        <macaddr enable="true" />
+        <swversion enable="true">V2.3.3</swversion>
       </model>
     </product>
     <product brand="Haier">
       <barcodelength>2</barcodelength>
       <macaddrlength>12</macaddrlength>
       <model name="70P3">
-        <swversion>V2.2.5</swversion>
+        <macaddr enable="true" />
+        <swversion enable="true">V2.2.5</swversion>
       </model>
       <model name="75P3">
-        <swversion>V2.3.5</swversion>
+        <macaddr enable="true" />
+        <swversion enable="true">V2.3.5</swversion>
       </model>
     </product>
   </products>
-  <serialport baud="9600" id="COM1" />
 </config>

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
-using System.Xml.Linq;
 using System.IO;
 
 namespace FacInfoCheckingTool.CSharp
@@ -46,9 +45,6 @@ namespace FacInfoCheckingTool.CSharp
             configXml.ComBaudRate = comboBoxBaudRate.Text;
             configXml.ComId = comboBoxComId.Text;
             configXml.SaveConfigXml();
-
-            ConfigXmlHandler.comBaudRate = comboBoxBaudRate.Text;
-            ConfigXmlHandler.comId = comboBoxComId.Text;
 
             this.Hide();
         }

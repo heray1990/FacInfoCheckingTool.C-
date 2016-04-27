@@ -106,15 +106,16 @@
             // TVSerialPortSettingToolStripMenuItem
             // 
             this.TVSerialPortSettingToolStripMenuItem.Name = "TVSerialPortSettingToolStripMenuItem";
-            this.TVSerialPortSettingToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.TVSerialPortSettingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.TVSerialPortSettingToolStripMenuItem.Text = "电视串口设置";
             this.TVSerialPortSettingToolStripMenuItem.Click += new System.EventHandler(this.TVSerialPortSettingToolStripMenuItem_Click);
             // 
             // InfoSettingToolStripMenuItem
             // 
             this.InfoSettingToolStripMenuItem.Name = "InfoSettingToolStripMenuItem";
-            this.InfoSettingToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.InfoSettingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.InfoSettingToolStripMenuItem.Text = "对比信息设置";
+            this.InfoSettingToolStripMenuItem.Click += new System.EventHandler(this.InfoSettingToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 

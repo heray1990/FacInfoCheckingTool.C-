@@ -155,6 +155,12 @@ namespace FacInfoCheckingTool.CSharp
             frmSerialPortSetting.Show();
         }
 
+        private void InfoSettingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTvInfoSetting frmTvInfoSetting = new FormTvInfoSetting();
+            frmTvInfoSetting.Show();
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -302,6 +308,6 @@ namespace FacInfoCheckingTool.CSharp
                 if (isCmdDataRecv) { break; }
                 Application.DoEvents();
             }
-        }
+        }        
     }
 }

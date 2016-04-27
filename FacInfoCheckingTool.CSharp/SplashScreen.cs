@@ -55,18 +55,19 @@ namespace FacInfoCheckingTool.CSharp
             comboBoxModel.SelectedIndex = index;
 
             ConfigXmlHandler.comBaudRate = configXml.ComBaudRate;
-            ConfigXmlHandler.comId = configXml.ComId;
+            ConfigXmlHandler.comId = configXml.ComId;            
 
             labelVersion.Text = OutputLog.Version();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            ConfigXmlHandler.currentBrand = comboBoxBrand.Text;
-            ConfigXmlHandler.currentModel = comboBoxModel.Text;
             configXml.CurrentBrand = comboBoxBrand.Text;
             configXml.CurrentModel = comboBoxModel.Text;
             configXml.SaveConfigXml();
+
+            ConfigXmlHandler.macAddrChecked = configXml.MacAddrChecked;
+            ConfigXmlHandler.swVerChecked = configXml.SwVerChecked;
 
             this.DialogResult = DialogResult.OK;
             this.Dispose();
