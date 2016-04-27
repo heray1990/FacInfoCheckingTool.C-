@@ -49,7 +49,8 @@ namespace FacInfoCheckingTool.CSharp
                 }
 
                 labelModelName.Text = ConfigXmlHandler.currentModel;
-                
+
+                InitSerialPortSetting();
                 this.Show();
             }
         }
@@ -59,7 +60,7 @@ namespace FacInfoCheckingTool.CSharp
             if (e.KeyChar == 13)
             {
                 if (watermarkTextBoxBarcode.Text.Length == 1)
-                {
+                {                    
                     watermarkTextBoxBarcode.ReadOnly = true;
                     watermarkTextBoxMacAddr.Focus();
                 }
@@ -97,24 +98,17 @@ namespace FacInfoCheckingTool.CSharp
             if (e.KeyChar == 13)
             {
                 if (watermarkTextBoxMacAddr.Text.Length == 12)
-                {
+                {                    
                     watermarkTextBoxMacAddr.ReadOnly = true;
                     textBoxLog.Focus();
 
                     try
                     {
-                        if (comPort.IsOpen) comPort.Close();
-                        else
+                        if (!comPort.IsOpen)
                         {
-                            // Serial Port setting
-                            comPort.BaudRate = int.Parse(ConfigXmlHandler.comBaudRate);
-                            comPort.PortName = ConfigXmlHandler.comId;
-                            comPort.DataBits = 8;
-                            comPort.ReadTimeout = 100;
-                            comPort.Open();
-
-                            MainTask();
+                            comPort.Open();                            
                         }
+                        MainTask();
                     }
                     catch (Exception ex)
                     {
@@ -235,6 +229,13 @@ namespace FacInfoCheckingTool.CSharp
                                 labelResult.Text = "NG";
                                 labelResult.BackColor = Color.Red;
                             }
+
+                            watermarkTextBoxBarcode.ReadOnly = false;
+                            watermarkTextBoxBarcode.Text = "";
+                            watermarkTextBoxBarcode.Focus();
+                            watermarkTextBoxMacAddr.ReadOnly = false;
+                            watermarkTextBoxMacAddr.Text = "";
+                            command.CommandIdx = 0;
                         }));
                     }
                 }
@@ -249,8 +250,24 @@ namespace FacInfoCheckingTool.CSharp
             }
         }
 
+        private void InitSerialPortSetting()
+        {
+            // Serial Port setting
+            if (comPort.IsOpen) comPort.Close();
+            else
+            {
+                comPort.BaudRate = int.Parse(ConfigXmlHandler.comBaudRate);
+                comPort.PortName = ConfigXmlHandler.comId;
+                comPort.DataBits = 8;
+                comPort.ReadTimeout = 100;
+            }
+        }
+
         private void MainTask()
-        {            
+        {
+            OutputLog.ShowLog(textBoxLog, "----------------");
+            OutputLog.ShowLog(textBoxLog, "Bar Code: " + watermarkTextBoxBarcode.Text);
+            OutputLog.ShowLog(textBoxLog, "MAC Address: " + watermarkTextBoxMacAddr.Text);
             isAllPass = true;
             isCmdDataRecv = false;
             labelMacAddr.BackColor = Color.White;
