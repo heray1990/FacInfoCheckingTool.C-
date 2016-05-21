@@ -32,10 +32,10 @@
             this.textBoxSwVersion = new System.Windows.Forms.TextBox();
             this.checkBoxMacAddr = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBoxMacAddr = new System.Windows.Forms.TextBox();
+            this.checkBoxSwVer = new System.Windows.Forms.CheckBox();
             this.labelModelName = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.checkBoxSwVer = new System.Windows.Forms.CheckBox();
-            this.textBoxMacAddr = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +84,26 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(260, 52);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
+            // textBoxMacAddr
+            // 
+            this.textBoxMacAddr.Location = new System.Drawing.Point(3, 29);
+            this.textBoxMacAddr.Name = "textBoxMacAddr";
+            this.textBoxMacAddr.ReadOnly = true;
+            this.textBoxMacAddr.Size = new System.Drawing.Size(124, 21);
+            this.textBoxMacAddr.TabIndex = 14;
+            this.textBoxMacAddr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // checkBoxSwVer
+            // 
+            this.checkBoxSwVer.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.checkBoxSwVer.Location = new System.Drawing.Point(133, 3);
+            this.checkBoxSwVer.Name = "checkBoxSwVer";
+            this.checkBoxSwVer.Size = new System.Drawing.Size(124, 20);
+            this.checkBoxSwVer.TabIndex = 13;
+            this.checkBoxSwVer.Text = "软件版本";
+            this.checkBoxSwVer.UseVisualStyleBackColor = false;
+            this.checkBoxSwVer.CheckedChanged += new System.EventHandler(this.checkBoxSwVer_CheckedChanged);
+            // 
             // labelModelName
             // 
             this.labelModelName.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -103,26 +123,6 @@
             this.buttonSave.Text = "保存";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
-            // checkBoxSwVer
-            // 
-            this.checkBoxSwVer.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.checkBoxSwVer.Location = new System.Drawing.Point(133, 3);
-            this.checkBoxSwVer.Name = "checkBoxSwVer";
-            this.checkBoxSwVer.Size = new System.Drawing.Size(124, 20);
-            this.checkBoxSwVer.TabIndex = 13;
-            this.checkBoxSwVer.Text = "软件版本";
-            this.checkBoxSwVer.UseVisualStyleBackColor = false;
-            this.checkBoxSwVer.CheckedChanged += new System.EventHandler(this.checkBoxSwVer_CheckedChanged);
-            // 
-            // textBoxMacAddr
-            // 
-            this.textBoxMacAddr.Location = new System.Drawing.Point(3, 29);
-            this.textBoxMacAddr.Name = "textBoxMacAddr";
-            this.textBoxMacAddr.ReadOnly = true;
-            this.textBoxMacAddr.Size = new System.Drawing.Size(124, 21);
-            this.textBoxMacAddr.TabIndex = 14;
-            this.textBoxMacAddr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // FormTvInfoSetting
             // 

@@ -49,7 +49,8 @@ namespace FacInfoCheckingTool.CSharp
                 }
 
                 labelModelName.Text = ConfigXmlHandler.currentModel;
-                
+
+                this.ShowInTaskbar = true;
                 this.Show();
             }
         }
